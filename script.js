@@ -473,21 +473,20 @@
   let touchStartY = 0;
   let touchEndY = 0;
 
-  function openPhotoModal(images, index) {
+function openPhotoModal(images, index) {
     modalImages = images;
     modalIndex = index;
     showModalImage();
+
+    // 모달이 열린 후 확대 기능을 엔진을 켭니다.
     setTimeout(() => {
         initPinchZoom();
     }, 100);
 
     $('#photoModal').classList.add('is-open');
     document.body.classList.add('no-scroll');
-  }
-    $('#photoModal').classList.add('is-open');
-    document.body.classList.add('no-scroll');
-  }
-
+  } // <--- 여기서 함수가 딱 끝나야 합니다!
+  
   function closePhotoModal() {
     $('#photoModal').classList.remove('is-open');
     document.body.classList.remove('no-scroll');
@@ -565,6 +564,8 @@
   }
 
   function handleSwipe() {
+    if (pz && pz.zoomFactor > 1) return;
+    
     const diffX = touchStartX - touchEndX;
     const diffY = touchStartY - touchEndY;
     const minSwipe = 50;
