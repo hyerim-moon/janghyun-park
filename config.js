@@ -67,19 +67,19 @@ const CONFIG = {
   accounts: {
     groom: [
       { role: "신랑", name: "박장현", bank: "국민은행", number: "000-000-000000" },
-      { role: "아버지", name: "홍판서", bank: "신한은행", number: "000-000-000000" },
-      { role: "어머니", name: "김부인", bank: "우리은행", number: "000-000-000000" }
+      { role: "아버지", name: "박천택", bank: "신한은행", number: "000-000-000000" },
+      { role: "어머니", name: "김미정", bank: "우리은행", number: "000-000-000000" }
     ],
     bride: [
       { role: "신부", name: "문혜림", bank: "국민은행", number: "058-24-0466-331" },
-      { role: "아버지", name: "김사장", bank: "기업은행", number: "000-000-000000" },
-      { role: "어머니", name: "이부인", bank: "농협은행", number: "000-000-000000" }
+      { role: "아버지", name: "문명오", bank: "기업은행", number: "000-000-000000" },
+      { role: "어머니", name: "김미자", bank: "농협은행", number: "000-000-000000" }
     ]
   },
 
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
-    title: "신랑 ♥ 신부 결혼합니다",
-    description: "2025년 1월 1일, 소중한 분들을 초대합니다."
+    title: "장현 ♥ 혜림 결혼합니다",
+    description: "2026년 9월 6일, 소중한 분들을 초대합니다."
   }
 };
