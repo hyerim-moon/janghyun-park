@@ -584,13 +584,16 @@ container.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 container.addEventListener('touchend', () => {
-  if (currentScale < 1) currentScale = 1;
+  currentScale = 1;
+  isZoomed = false;
 
-  if (currentScale === 1) {
-    isZoomed = false;
-  }
+  modalImg.style.transition = 'transform 0.2s ease';
+  modalImg.style.transform = 'scale(1)';
+  modalImg.style.transformOrigin = 'center center';
 
-  modalImg.style.transform = `scale(${currentScale})`;
+  setTimeout(() => {
+    modalImg.style.transition = 'transform 0.15s ease';
+  }, 200);
 }, { passive: false });
     
     container.addEventListener('touchstart', (e) => {
