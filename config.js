@@ -41,10 +41,10 @@ const CONFIG = {
     venue: "팔레드오페라 3층 트리아농홀",
     hall: "-",
     address: "대전 서구 둔산남로 50 팔레드오페라",
-    tel: "02-1234-5678",
+    tel: "042-300-5000",
     mapLinks: {
-      kakao: "https://map.kakao.com/",
-      naver: "https://map.naver.com/"
+      kakao: "https://kko.to/naymJTuDGY",
+      naver: "https://naver.me/5XJ5pd2B"
     }
   },
 
