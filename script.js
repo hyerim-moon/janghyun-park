@@ -84,23 +84,33 @@
      Clipboard
      ═══════════════════════════════════════════ */
 
-  async function copyToClipboard(text, successMsg) {
+async function copyToClipboard(text, successMsg) {
     try {
+      // 1. 최신 브라우저 방식 시도
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
+        showToast(successMsg || '복사되었습니다');
       } else {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.cssText = 'position:fixed;opacity:0;left:-9999px';
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
+        // 2. 구형 브라우저나 보안 연결(HTTP)이 아닐 경우 대응
+        throw new Error('Fallback'); 
       }
-      showToast(successMsg || '복사되었습니다');
-    } catch {
-      showToast('복사에 실패했습니다');
+    } catch (err) {
+      // 3. 텍스트에어리어를 생성해서 복사하는 전통적인 방식 (가장 안전함)
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg || '복사되었습니다');
+      } catch (copyErr) {
+        console.error('복사 실패:', copyErr);
+      }
+      document.body.removeChild(ta);
     }
   }
 
