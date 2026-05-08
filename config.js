@@ -29,7 +29,7 @@ const CONFIG = {
   bride: {
     name: "문혜림",
     nameEn: "Hyerim Moon",
-    father: "아버지",
+    father: "문명오",
     mother: "어머니",
     fatherDeceased: false,
     motherDeceased: false
