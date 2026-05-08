@@ -559,8 +559,27 @@ container.addEventListener('touchmove', (e) => {
     const currentDistance = getDistance(e.touches);
     const scale = currentDistance / initialDistance;
 
-    currentScale = Math.min(Math.max(scale, 1), 3);
-    modalImg.style.transform = `scale(${currentScale})`;
+    currentScale = Math.min(Math.max(scale, 1), 5);
+
+    const rect = modalImg.getBoundingClientRect();
+
+    const centerX =
+      (e.touches[0].clientX + e.touches[1].clientX) / 2;
+
+    const centerY =
+      (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
+    const originX =
+      ((centerX - rect.left) / rect.width) * 100;
+
+    const originY =
+      ((centerY - rect.top) / rect.height) * 100;
+
+    modalImg.style.transformOrigin =
+      `${originX}% ${originY}%`;
+
+    modalImg.style.transform =
+      `scale(${currentScale})`;
   }
 }, { passive: false });
 
