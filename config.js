@@ -36,8 +36,8 @@ const CONFIG = {
   },
 
   wedding: {
-    date: "2026-05-09",
-    time: "13:00",
+    date: "2026-09-06",
+    time: "13:40",
     venue: "예식장 이름",
     hall: "그랜드홀 5층",
     address: "서울특별시 강남구 테헤란로 123",
