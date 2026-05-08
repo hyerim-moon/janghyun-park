@@ -251,7 +251,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 9000;
-  background: rgba(0, 0, 0, 0.95);
+  background: var(--color-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -269,7 +269,7 @@ a {
   position: absolute;
   top: calc(1rem + var(--safe-top));
   right: calc(1rem + var(--safe-right));
-  color: var(--color-white);
+  color: var(--color-text);
   font-size: 2rem;
   width: 44px;
   height: 44px;
@@ -289,7 +289,7 @@ a {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-white);
+  color: var(--color-text);
   font-size: 2.5rem;
   width: 48px;
   height: 48px;
@@ -337,7 +337,7 @@ a {
   bottom: calc(1.5rem + var(--safe-bottom));
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-light);
   font-family: var(--font-display);
   font-size: 0.875rem;
   letter-spacing: 2px;
