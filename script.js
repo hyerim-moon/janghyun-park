@@ -524,12 +524,16 @@ function resetZoom() {
       }
     });
     const modalImg = $('#modalImg');
+    
+    let initialDistance = 0;
+    let currentScale = 1;
 
-modalImg.addEventListener('click', (e) => {
-  e.stopPropagation();
-  isZoomed = !isZoomed;
-  modalImg.classList.toggle('is-zoomed', isZoomed);
-});
+function getDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -541,7 +545,32 @@ modalImg.addEventListener('click', (e) => {
 
     // Swipe support
     const container = $('#modalContainer');
+container.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 2) {
+    initialDistance = getDistance(e.touches);
+    isZoomed = true;
+  }
+}, { passive: false });
 
+container.addEventListener('touchmove', (e) => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+
+    const currentDistance = getDistance(e.touches);
+    const scale = currentDistance / initialDistance;
+
+    currentScale = Math.min(Math.max(scale, 1), 3);
+    modalImg.style.transform = `scale(${currentScale})`;
+  }
+}, { passive: false });
+
+container.addEventListener('touchend', () => {
+  if (currentScale <= 1.05) {
+    currentScale = 1;
+    isZoomed = false;
+    modalImg.style.transform = 'scale(1)';
+  }
+}, { passive: false });
     container.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
