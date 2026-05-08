@@ -1160,6 +1160,18 @@ a {
 }
 
 #modalImg {
+  width: 100vw;
+  max-width: 100vw;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
   transition: transform 0.15s ease;
   transform-origin: center center;
+}
+#modalContainer {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
