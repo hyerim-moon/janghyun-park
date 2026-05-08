@@ -40,7 +40,7 @@ const CONFIG = {
     time: "13:40",
     venue: "팔레드오페라 3층 트리아농홀",
     hall: "-",
-    address: "서울특별시 강남구 테헤란로 123",
+    address: "대전 서구 둔산남로 50 팔레드오페라",
     tel: "02-1234-5678",
     mapLinks: {
       kakao: "https://map.kakao.com/",
