@@ -473,7 +473,6 @@
   let touchStartY = 0;
   let touchEndY = 0;
 
-  let isZoomed = false;
 
 function resetZoom() {
   isZoomed = false;
@@ -555,19 +554,21 @@ modalImg.addEventListener('click', (e) => {
     }, { passive: true });
   }
 
-  function handleSwipe() {
-    const diffX = touchStartX - touchEndX;
-    const diffY = touchStartY - touchEndY;
-    const minSwipe = 50;
+function handleSwipe() {
+  if (isZoomed) return;
 
-    if (Math.abs(diffX) < minSwipe || Math.abs(diffX) < Math.abs(diffY)) return;
+  const diffX = touchStartX - touchEndX;
+  const diffY = touchStartY - touchEndY;
+  const minSwipe = 50;
 
-    if (diffX > 0) {
-      modalNavigate(1); // swipe left -> next
-    } else {
-      modalNavigate(-1); // swipe right -> prev
-    }
+  if (Math.abs(diffX) < minSwipe || Math.abs(diffX) < Math.abs(diffY)) return;
+
+  if (diffX > 0) {
+    modalNavigate(1);
+  } else {
+    modalNavigate(-1);
   }
+}
 
   /* ═══════════════════════════════════════════
      Location Section
