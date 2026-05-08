@@ -190,4 +190,60 @@
     class Petal {
       constructor() { this.reset(true); }
       reset(initial = false) {
-        this
+        this.x = Math.random() * width; this.y = initial ? Math.random() * height * -1 : -20;
+        this.size = 8 + Math.random() * 10; this.speedY = 0.5 + Math.random() * 1;
+        this.speedX = -0.3 + Math.random() * 0.6; this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02; this.opacity = 0.2 + Math.random() * 0.4;
+      }
+      update() { this.y += this.speedY; this.rotation += this.rotSpeed; if (this.y > height + 20) this.reset(); }
+      draw() {
+        ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation); ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#e8c8b0'; ctx.beginPath(); ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(this.size * 0.3, -this.size * 0.4, this.size * 0.7, -this.size * 0.5, this.size, 0);
+        ctx.bezierCurveTo(this.size * 0.7, this.size * 0.3, this.size * 0.3, this.size * 0.3, 0, 0);
+        ctx.fill(); ctx.restore();
+      }
+    }
+    for (let i = 0; i < 25; i++) petals.push(new Petal());
+    function animate() { ctx.clearRect(0, 0, width, height); petals.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+    animate();
+  }
+
+  // 갤러리/스토리 초기화 (함수 통합)
+  function initMedia(imgs, containerId, isGallery = false) {
+    const container = $(`#${containerId}`);
+    if (!container) return;
+    const placeholder = container.querySelector('.loading-placeholder');
+    if (placeholder) placeholder.remove();
+    imgs.forEach((src, i) => {
+      const div = document.createElement('div');
+      div.className = `${isGallery ? 'gallery__item' : 'story__photo-item'} animate-item`;
+      div.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+      div.addEventListener('click', () => openPhotoModal(imgs, i));
+      container.appendChild(div);
+    });
+  }
+
+  async function init() {
+    document.title = CONFIG.meta.title;
+    initCurtain();
+    initPhotoModal();
+    // 기타 섹션 초기화 (축약형)
+    $('#heroPhoto').src = 'images/hero/1.jpg';
+    $('#heroNames').textContent = `${CONFIG.groom.name} · ${CONFIG.bride.name}`;
+    $('#heroDate').textContent = formatDate(CONFIG.wedding.date, CONFIG.wedding.time);
+    $('#heroVenue').textContent = CONFIG.wedding.venue;
+
+    const [storyImgs, galleryImgs] = await Promise.all([
+      loadImagesFromFolder('story'), loadImagesFromFolder('gallery')
+    ]);
+    initMedia(storyImgs, 'storyPhotos');
+    initMedia(galleryImgs, 'galleryGrid', true);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
