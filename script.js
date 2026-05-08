@@ -565,12 +565,15 @@ container.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 container.addEventListener('touchend', () => {
-  if (currentScale <= 1.05) {
-    currentScale = 1;
+  if (currentScale < 1) currentScale = 1;
+
+  if (currentScale === 1) {
     isZoomed = false;
-    modalImg.style.transform = 'scale(1)';
   }
+
+  modalImg.style.transform = `scale(${currentScale})`;
 }, { passive: false });
+    
     container.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
