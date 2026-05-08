@@ -464,62 +464,55 @@
   /* ═══════════════════════════════════════════
      Photo Modal (with swipe)
      ═══════════════════════════════════════════ */
-
-  let modalImages = [];
+let modalImages = [];
   let modalIndex = 0;
-  let pz = null;
+  let pz = null; // 확대(Zoom) 인스턴스 변수
   let touchStartX = 0;
   let touchEndX = 0;
   let touchStartY = 0;
   let touchEndY = 0;
 
-function openPhotoModal(images, index) {
-    modalImages = images;
-    modalIndex = index;
-    showModalImage();
-
-    // 모달이 열린 후 확대 기능을 엔진을 켭니다.
-    setTimeout(() => {
-        initPinchZoom();
-    }, 100);
-
-    $('#photoModal').classList.add('is-open');
-    document.body.classList.add('no-scroll');
-  } // <--- 여기서 함수가 딱 끝나야 합니다!
-  
-  function closePhotoModal() {
-    $('#photoModal').classList.remove('is-open');
-    document.body.classList.remove('no-scroll');
-  }
-
-  function showModalImage() {
-    const img = $('#modalImg');
-    if (pz) pz.scaleTo(1, { animate: false });
-    
-    img.src = modalImages[modalIndex];
-    $('#modalCounter').textContent = `${modalIndex + 1} / ${modalImages.length}`;
-
-    $('#modalPrev').style.display = modalIndex > 0 ? '' : 'none';
-    $('#modalNext').style.display = modalIndex < modalImages.length - 1 ? '' : 'none';
-  }
-// 확대 기능을 초기화하고 연결하는 새로운 함수입니다.
+  // 1. 확대 엔진 초기화 함수
   function initPinchZoom() {
-    const el = $('#modalContainer'); // 사진을 감싸고 있는 박스를 찾습니다.
-    
-    // 혹시 이미 확대 기능이 켜져 있다면, 중복 방지를 위해 일단 끄고 새로 시작합니다.
-    if (pz) {
-      pz.destroy();
-    }
-
-    // PinchZoom 라이브러리를 가동합니다.
+    const el = $('#modalContainer');
+    if (!el) return;
+    if (pz) pz.destroy(); // 기존 인스턴스 제거
     pz = new PinchZoom(el, {
-      draggableUnzoomed: false, // 사진이 원래 크기일 때는 손가락으로 밀어도 사진이 안 움직이게 합니다. (스와이프를 위해)
-      minZoom: 1,               // 최소 크기는 원래 크기(1배)
-      maxZoom: 4,               // 최대 4배까지 확대 가능
-      tapZoomFactor: 2          // 더블 탭(두 번 빠르게 클릭) 시 2배로 확대
+      draggableUnzoomed: false, 
+      minZoom: 1,
+      maxZoom: 4,
+      tapZoomFactor: 2
     });
   }
 
+  // 2. 모달 열기
+  function openPhotoModal(images, index) {
+    modalImages = images;
+    modalIndex = index;
+    showModalImage();
+    setTimeout(() => { initPinchZoom(); }, 100);
+    $('#photoModal').classList.add('is-open');
+    document.body.classList.add('no-scroll');
+  }
+
+  // 3. 모달 닫기
+  function closePhotoModal() {
+    $('#photoModal').classList.remove('is-open');
+    document.body.classList.remove('no-scroll');
+    if (pz) pz.scaleTo(1, { animate: false });
+  }
+
+  // 4. 사진 표시 (넘길 때마다 확대 초기화)
+  function showModalImage() {
+    const img = $('#modalImg');
+    if (pz) pz.scaleTo(1, { animate: false });
+    img.src = modalImages[modalIndex];
+    $('#modalCounter').textContent = `${modalIndex + 1} / ${modalImages.length}`;
+    $('#modalPrev').style.display = modalIndex > 0 ? '' : 'none';
+    $('#modalNext').style.display = modalIndex < modalImages.length - 1 ? '' : 'none';
+  }
+
+  // 5. 이동 로직
   function modalNavigate(dir) {
     const newIndex = modalIndex + dir;
     if (newIndex >= 0 && newIndex < modalImages.length) {
@@ -528,6 +521,7 @@ function openPhotoModal(images, index) {
     }
   }
 
+  // 6. 이벤트 초기화
   function initPhotoModal() {
     $('#modalClose').addEventListener('click', closePhotoModal);
     $('#modalPrev').addEventListener('click', () => modalNavigate(-1));
@@ -535,22 +529,10 @@ function openPhotoModal(images, index) {
 
     const modal = $('#photoModal');
     modal.addEventListener('click', (e) => {
-      if (e.target === modal || e.target.id === 'modalContainer') {
-        closePhotoModal();
-      }
+      if (e.target === modal || e.target.id === 'modalContainer') closePhotoModal();
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!modal.classList.contains('is-open')) return;
-      if (e.key === 'Escape') closePhotoModal();
-      if (e.key === 'ArrowLeft') modalNavigate(-1);
-      if (e.key === 'ArrowRight') modalNavigate(1);
-    });
-
-    // Swipe support
     const container = $('#modalContainer');
-
     container.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
@@ -563,22 +545,16 @@ function openPhotoModal(images, index) {
     }, { passive: true });
   }
 
+  // 7. 스와이프 핸들러 (확대 중엔 넘기기 금지)
   function handleSwipe() {
     if (pz && pz.zoomFactor > 1) return;
-    
     const diffX = touchStartX - touchEndX;
     const diffY = touchStartY - touchEndY;
-    const minSwipe = 50;
-
-    if (Math.abs(diffX) < minSwipe || Math.abs(diffX) < Math.abs(diffY)) return;
-
-    if (diffX > 0) {
-      modalNavigate(1); // swipe left -> next
-    } else {
-      modalNavigate(-1); // swipe right -> prev
-    }
+    if (Math.abs(diffX) < 50 || Math.abs(diffX) < Math.abs(diffY)) return;
+    if (diffX > 0) modalNavigate(1);
+    else modalNavigate(-1);
   }
-
+\
   /* ═══════════════════════════════════════════
      Location Section
      ═══════════════════════════════════════════ */
