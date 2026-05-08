@@ -18,8 +18,8 @@ const CONFIG = {
 
   // ── 메인 (히어로) ──
   groom: {
-    name: "신랑",
-    nameEn: "Groom",
+    name: "박장현",
+    nameEn: "Janghyun Park",
     father: "여기서이렇게이름을바꾸시면됩니다",
     mother: "어머니",
     fatherDeceased: false,
