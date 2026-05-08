@@ -635,6 +635,9 @@ function handleSwipe() {
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
     $('#locationMapImg').src = 'images/location/1.jpg';
+    $('#locationMapImg').addEventListener('click', () => {
+  openPhotoModal(['images/location/1.jpg'], 0);
+});
     $('#kakaoMapBtn').href = w.mapLinks.kakao || '#';
     $('#naverMapBtn').href = w.mapLinks.naver || '#';
 
