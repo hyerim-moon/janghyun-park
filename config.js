@@ -20,8 +20,8 @@ const CONFIG = {
   groom: {
     name: "박장현",
     nameEn: "Janghyun Park",
-    father: "여기서이렇게이름을바꾸시면됩니다",
-    mother: "어머니",
+    father: "박천택",
+    mother: "김미정",
     fatherDeceased: false,
     motherDeceased: false
   },
