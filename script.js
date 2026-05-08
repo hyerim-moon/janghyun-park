@@ -464,7 +464,8 @@
   /* ═══════════════════════════════════════════
      Photo Modal (with swipe)
      ═══════════════════════════════════════════ */
-let modalImages = [];
+
+  let modalImages = [];
   let modalIndex = 0;
   let pz = null; // 확대(Zoom) 인스턴스 변수
   let touchStartX = 0;
@@ -472,11 +473,11 @@ let modalImages = [];
   let touchStartY = 0;
   let touchEndY = 0;
 
-  // 1. 확대 엔진 초기화 함수
+  // 1. 확대 엔진 초기화
   function initPinchZoom() {
     const el = $('#modalContainer');
     if (!el) return;
-    if (pz) pz.destroy(); // 기존 인스턴스 제거
+    if (pz) pz.destroy(); 
     pz = new PinchZoom(el, {
       draggableUnzoomed: false, 
       minZoom: 1,
