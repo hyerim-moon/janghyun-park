@@ -554,7 +554,7 @@ let modalImages = [];
     if (diffX > 0) modalNavigate(1);
     else modalNavigate(-1);
   }
-\
+  
   /* ═══════════════════════════════════════════
      Location Section
      ═══════════════════════════════════════════ */
