@@ -286,19 +286,7 @@ a {
 }
 
 .photo-modal__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-text);
-  font-size: 2.5rem;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  opacity: 0.7;
-  transition: opacity var(--transition);
+  display: none;
 }
 
 .photo-modal__nav:hover {
