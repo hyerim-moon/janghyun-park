@@ -38,8 +38,8 @@ const CONFIG = {
   wedding: {
     date: "2026-09-06",
     time: "13:40",
-    venue: "예식장 이름",
-    hall: "그랜드홀 5층",
+    venue: "팔레드오페라 3층 트리아농홀",
+    hall: "-",
     address: "서울특별시 강남구 테헤란로 123",
     tel: "02-1234-5678",
     mapLinks: {
