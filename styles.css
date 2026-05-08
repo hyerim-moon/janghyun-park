@@ -1158,3 +1158,12 @@ a {
     transform: none !important;
   }
 }
+#modalImg {
+  transition: transform 0.25s ease;
+  cursor: zoom-in;
+}
+
+#modalImg.is-zoomed {
+  transform: scale(2.2);
+  cursor: zoom-out;
+}
