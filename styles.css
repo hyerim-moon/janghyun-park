@@ -75,6 +75,8 @@ body {
 }
 
 body.no-scroll {
+  overflow: hidden;
+  position: fixed;
   width: 100%;
 }
 
@@ -108,6 +110,100 @@ a {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ═══════════════════════════════════════════
+   Curtain Opening Animation
+   ═══════════════════════════════════════════ */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curtain__left,
+.curtain__right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(180deg, #4a3f35 0%, #3a3228 100%);
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+  will-change: transform;
+}
+
+.curtain__left {
+  left: 0;
+}
+
+.curtain__right {
+  right: 0;
+}
+
+.curtain.is-open .curtain__left {
+  transform: translateX(-100%);
+}
+
+.curtain.is-open .curtain__right {
+  transform: translateX(100%);
+}
+
+.curtain.is-open .curtain__content {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.curtain.is-hidden {
+  display: none;
+}
+
+.curtain__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--color-white);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.curtain__subtitle {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.8;
+}
+
+.curtain__names {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 300;
+  letter-spacing: 6px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.curtain__btn {
+  display: inline-block;
+  padding: 0.875rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  background: transparent;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.curtain__btn:hover,
+.curtain__btn:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 /* ═══════════════════════════════════════════
@@ -223,9 +319,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0; /* 내부 패딩을 제거해야 확대 시 여백이 깔끔합니다 */
- overflow: hidden !important; /* 확대된 사진이 화면 밖으로 나가지 않게 함 */
-  touch-action: none !important;
+  padding: 3.5rem 2.5rem;
+  touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -234,14 +329,7 @@ a {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  /* 라이브러리가 직접 transform을 조절하므로 기존 transition: transform 0.3s는 제거하거나 아래와 같이 설정합니다 */
-  transition: opacity 0.3s ease; 
-  will-change: transform; /* 모바일 하드웨어 가속 사용 */
-}
-.photo-modal__nav,
-.photo-modal__close,
-.photo-modal__counter {
-  z-index: 10;
+  transition: transform 0.3s ease;
 }
 
 .photo-modal__counter {
@@ -1053,6 +1141,7 @@ a {
    Print (hide interactive elements)
    ═══════════════════════════════════════════ */
 @media print {
+  .curtain,
   .petal-canvas,
   .photo-modal,
   .toast,

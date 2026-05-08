@@ -7,9 +7,9 @@
 
   <!-- Meta / OG tags - config.js 값으로 script에서 동적 설정 -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="박장현♥문혜림 결혼식에 소중한 분들을 초대합니다">
-  <meta property="og:description" content="2026년 09월 06일">
-  <meta property="og:image" content="https://hyerim-moon.github.io/janghyun-park/">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
   <meta name="description" content="">
 
   <title>Wedding Invitation</title>
@@ -20,10 +20,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
-
+  <script src="config.js"></script>
 </head>
 <body>
 
+  <!-- ═══ Curtain Opening Animation ═══ -->
+  <div id="curtain" class="curtain">
+    <div class="curtain__left"></div>
+    <div class="curtain__right"></div>
+    <div class="curtain__content">
+      <p class="curtain__subtitle">Wedding Invitation</p>
+      <p class="curtain__names" id="curtainNames"></p>
+      <button class="curtain__btn" id="curtainBtn">초대장 열기</button>
+    </div>
+  </div>
 
   <!-- ═══ Falling Petals ═══ -->
   <canvas id="petalCanvas" class="petal-canvas"></canvas>
@@ -32,12 +42,10 @@
   <div id="toast" class="toast" aria-live="polite"></div>
 
   <!-- ═══ Photo Viewer Modal ═══ -->
-    <div id="photoModal" class="photo-modal" role="dialog" aria-modal="true" aria-label="사진 보기">
+  <div id="photoModal" class="photo-modal" role="dialog" aria-modal="true" aria-label="사진 보기">
     <button class="photo-modal__close" id="modalClose" aria-label="닫기">&times;</button>
-    
     <button class="photo-modal__nav photo-modal__nav--prev" id="modalPrev" aria-label="이전 사진">&#8249;</button>
     <button class="photo-modal__nav photo-modal__nav--next" id="modalNext" aria-label="다음 사진">&#8250;</button>
-    
     <div class="photo-modal__container" id="modalContainer">
       <img class="photo-modal__img" id="modalImg" src="" alt="사진" draggable="false">
     </div>
@@ -193,8 +201,7 @@
     </footer>
 
   </main>
-  <script src="https://unpkg.com/pinch-zoom-js@2.3.5/dist/pinch-zoom.umd.js"></script>
-  <script src="config.js"></script>
+
   <script src="script.js"></script>
 </body>
 </html>

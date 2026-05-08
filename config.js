@@ -18,33 +18,33 @@ const CONFIG = {
 
   // ── 메인 (히어로) ──
   groom: {
-    name: "박장현",
-    nameEn: "Janghyun Park",
-    father: "박천택",
-    mother: "김미정",
+    name: "신랑",
+    nameEn: "Groom",
+    father: "여기서이렇게이름을바꾸시면됩니다",
+    mother: "어머니",
     fatherDeceased: false,
     motherDeceased: false
   },
 
   bride: {
-    name: "문혜림",
-    nameEn: "Hyerim Moon",
-    father: "문명오",
-    mother: "김미자",
+    name: "신부",
+    nameEn: "Bride",
+    father: "아버지",
+    mother: "어머니",
     fatherDeceased: false,
     motherDeceased: false
   },
 
   wedding: {
-    date: "2026-09-06",
-    time: "13:40",
-    venue: "팔레드오페라",
-    hall: "트리아농홀 3층",
-    address: "대전광역시 서구 둔산남로 50 팔레드오페라",
-    tel: "042-300-5000",
+    date: "2026-05-09",
+    time: "13:00",
+    venue: "예식장 이름",
+    hall: "그랜드홀 5층",
+    address: "서울특별시 강남구 테헤란로 123",
+    tel: "02-1234-5678",
     mapLinks: {
-      kakao: "https://kko.to/naymJTuDGY",
-      naver: "https://naver.me/5XJ5pd2B"
+      kakao: "https://map.kakao.com/",
+      naver: "https://map.naver.com/"
     }
   },
 
@@ -66,20 +66,20 @@ const CONFIG = {
   // ── 마음 전하실 곳 ──
   accounts: {
     groom: [
-      { role: "신랑", name: "박장현", bank: "국민은행", number: "599702-04-180042" },
-      { role: "아버지", name: "박천택", bank: "신한은행", number: "000-000-000000" },
-      { role: "어머니", name: "김미정", bank: "우리은행", number: "000-000-000000" }
+      { role: "신랑", name: "홍길동", bank: "국민은행", number: "000-000-000000" },
+      { role: "아버지", name: "홍판서", bank: "신한은행", number: "000-000-000000" },
+      { role: "어머니", name: "김부인", bank: "우리은행", number: "000-000-000000" }
     ],
     bride: [
-      { role: "신부", name: "문혜림", bank: "국민은행", number: "058-24-0466-331" },
-      { role: "아버지", name: "문명오", bank: "기업은행", number: "000-000-000000" },
-      { role: "어머니", name: "김미자", bank: "국민은행", number: "000-000-000000" }
+      { role: "신부", name: "김영희", bank: "하나은행", number: "000-000-000000" },
+      { role: "아버지", name: "김사장", bank: "기업은행", number: "000-000-000000" },
+      { role: "어머니", name: "이부인", bank: "농협은행", number: "000-000-000000" }
     ]
   },
 
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
-    title: "박장현 ♥ 문혜림 결혼식에 소중한 분들을 초대합니다",
-    description: "2026년 9월 6일"
+    title: "신랑 ♥ 신부 결혼합니다",
+    description: "2025년 1월 1일, 소중한 분들을 초대합니다."
   }
 };
