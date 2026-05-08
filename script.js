@@ -469,9 +469,18 @@
   let modalIndex = 0;
   let touchStartX = 0;
   let touchEndX = 0;
+  let isZoomed = false;
   let touchStartY = 0;
   let touchEndY = 0;
 
+  let isZoomed = false;
+
+function resetZoom() {
+  isZoomed = false;
+  const img = $('#modalImg');
+  img.classList.remove('is-zoomed');
+}
+  
   function openPhotoModal(images, index) {
     modalImages = images;
     modalIndex = index;
@@ -485,9 +494,11 @@
     document.body.classList.remove('no-scroll');
   }
 
-  function showModalImage() {
-    const img = $('#modalImg');
-    img.src = modalImages[modalIndex];
+ function showModalImage() {
+  resetZoom();
+
+  const img = $('#modalImg');
+  img.src = modalImages[modalIndex];
     $('#modalCounter').textContent = `${modalIndex + 1} / ${modalImages.length}`;
 
     $('#modalPrev').style.display = modalIndex > 0 ? '' : 'none';
@@ -513,6 +524,13 @@
         closePhotoModal();
       }
     });
+    const modalImg = $('#modalImg');
+
+modalImg.addEventListener('click', (e) => {
+  e.stopPropagation();
+  isZoomed = !isZoomed;
+  modalImg.classList.toggle('is-zoomed', isZoomed);
+});
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
