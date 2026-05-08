@@ -30,7 +30,7 @@ const CONFIG = {
     name: "문혜림",
     nameEn: "Hyerim Moon",
     father: "문명오",
-    mother: "어머니",
+    mother: "김미자",
     fatherDeceased: false,
     motherDeceased: false
   },
