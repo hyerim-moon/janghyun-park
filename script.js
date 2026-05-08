@@ -423,7 +423,7 @@
     if (placeholder) placeholder.remove();
 
     if (storyImages.length === 0) return;
-
+/*
     storyImages.forEach((src, i) => {
       const div = document.createElement('div');
       div.className = 'story__photo-item animate-item';
@@ -432,6 +432,7 @@
       div.addEventListener('click', () => openPhotoModal(storyImages, i));
       container.appendChild(div);
     });
+    */
   }
 
   /* ═══════════════════════════════════════════
