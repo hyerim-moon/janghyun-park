@@ -467,6 +467,7 @@
 
   let modalImages = [];
   let modalIndex = 0;
+  let pz = null;
   let touchStartX = 0;
   let touchEndX = 0;
   let touchStartY = 0;
@@ -476,6 +477,13 @@
     modalImages = images;
     modalIndex = index;
     showModalImage();
+    setTimeout(() => {
+        initPinchZoom();
+    }, 100);
+
+    $('#photoModal').classList.add('is-open');
+    document.body.classList.add('no-scroll');
+  }
     $('#photoModal').classList.add('is-open');
     document.body.classList.add('no-scroll');
   }
@@ -487,11 +495,30 @@
 
   function showModalImage() {
     const img = $('#modalImg');
+    if (pz) pz.scaleTo(1, { animate: false });
+    
     img.src = modalImages[modalIndex];
     $('#modalCounter').textContent = `${modalIndex + 1} / ${modalImages.length}`;
 
     $('#modalPrev').style.display = modalIndex > 0 ? '' : 'none';
     $('#modalNext').style.display = modalIndex < modalImages.length - 1 ? '' : 'none';
+  }
+// 확대 기능을 초기화하고 연결하는 새로운 함수입니다.
+  function initPinchZoom() {
+    const el = $('#modalContainer'); // 사진을 감싸고 있는 박스를 찾습니다.
+    
+    // 혹시 이미 확대 기능이 켜져 있다면, 중복 방지를 위해 일단 끄고 새로 시작합니다.
+    if (pz) {
+      pz.destroy();
+    }
+
+    // PinchZoom 라이브러리를 가동합니다.
+    pz = new PinchZoom(el, {
+      draggableUnzoomed: false, // 사진이 원래 크기일 때는 손가락으로 밀어도 사진이 안 움직이게 합니다. (스와이프를 위해)
+      minZoom: 1,               // 최소 크기는 원래 크기(1배)
+      maxZoom: 4,               // 최대 4배까지 확대 가능
+      tapZoomFactor: 2          // 더블 탭(두 번 빠르게 클릭) 시 2배로 확대
+    });
   }
 
   function modalNavigate(dir) {
