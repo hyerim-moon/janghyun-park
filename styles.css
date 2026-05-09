@@ -424,7 +424,7 @@ a {
   text-transform: uppercase;
   margin-bottom: var(--spacing-sm);
   opacity: 0.85;
-     transform: translateY(-120px);
+   transform: translateY(-160px);
 }
 
 .hero__names {
@@ -434,7 +434,7 @@ a {
   letter-spacing: 8px;
   margin-bottom: var(--spacing-md);
   line-height: 1.4;
-     transform: translateY(-120px);
+   transform: translateY(-160px);
 }
 
 .hero__divider {
