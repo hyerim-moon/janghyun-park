@@ -330,15 +330,15 @@
   function initCalendar() {
     const dt = getWeddingDateTime();
     const year = dt.getFullYear();
-    const month = dt.getMonth();
+     = dt.getMonth();
     const weddingDay = dt.getDate();
 
     const grid = $('#calendarGrid');
 
     // Header
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    grid.innerHTML = `<div class="calendar__header">${monthNames[month]} ${year}</div>`;
+      'July', 'August', 'Septembe', 'October', 'November', 'December'];
+    grid.innerHTML = `<div class="calendar__header">${year}년 ${month + 1}월</div>`;
 
     // Weekdays
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
