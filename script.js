@@ -412,32 +412,10 @@ const weddingDay = dt.getDate();
   /* ═══════════════════════════════════════════
      Story Section
      ═══════════════════════════════════════════ */
- /*
+ 
   function initStory(storyImages) {
-    $('#storyTitle').textContent = CONFIG.story.title;
-    $('#storyContent').textContent = CONFIG.story.content;
-
-    const container = $('#storyPhotos');
-    // Remove loading placeholder if present
-    const placeholder = container.querySelector('.loading-placeholder');
-    if (placeholder) placeholder.remove();
-
-    if (storyImages.length === 0) return;
-/*
-    storyImages.forEach((src, i) => {
-      const div = document.createElement('div');
-      div.className = 'story__photo-item animate-item';
-      div.setAttribute('data-animate', 'fade-up');
-      div.innerHTML = `<img src="${src}" alt="스토리 사진 ${i + 1}" loading="lazy">`;
-div.addEventListener('click', () => {
-  isMapMode = false;
-  openPhotoModal(galleryImages, i);
-});
-      container.appendChild(div);
-    });
-    */
   }
-*/
+
   /* ═══════════════════════════════════════════
      Gallery Section
      ═══════════════════════════════════════════ */
@@ -856,8 +834,8 @@ $('#locationMapImg').addEventListener('click', () => {
     initScrollAnimations();
 
     // Set story text immediately (photos load async)
-    $('#storyTitle').textContent = CONFIG.story.title;
-    $('#storyContent').textContent = CONFIG.story.content;
+  //  $('#storyTitle').textContent = CONFIG.story.title;
+  //  $('#storyContent').textContent = CONFIG.story.content;
 
     // Auto-detect story and gallery images in parallel
     const [storyImages, galleryImages] = await Promise.all([
