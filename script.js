@@ -412,7 +412,7 @@ const weddingDay = dt.getDate();
   /* ═══════════════════════════════════════════
      Story Section
      ═══════════════════════════════════════════ */
-
+ /*
   function initStory(storyImages) {
     $('#storyTitle').textContent = CONFIG.story.title;
     $('#storyContent').textContent = CONFIG.story.content;
@@ -437,7 +437,7 @@ div.addEventListener('click', () => {
     });
     */
   }
-
+*/
   /* ═══════════════════════════════════════════
      Gallery Section
      ═══════════════════════════════════════════ */
