@@ -429,7 +429,10 @@
       div.className = 'story__photo-item animate-item';
       div.setAttribute('data-animate', 'fade-up');
       div.innerHTML = `<img src="${src}" alt="스토리 사진 ${i + 1}" loading="lazy">`;
-      div.addEventListener('click', () => openPhotoModal(storyImages, i));
+div.addEventListener('click', () => {
+  isMapMode = false;
+  openPhotoModal(galleryImages, i);
+});
       container.appendChild(div);
     });
     */
@@ -468,6 +471,7 @@
 
   let modalImages = [];
   let modalIndex = 0;
+  let isMapMode = false;
   let touchStartX = 0;
   let touchEndX = 0;
   let isZoomed = false;
@@ -585,6 +589,13 @@ container.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 container.addEventListener('touchend', () => {
+
+  // 오시는 길 이미지는 확대 유지
+  if (isMapMode) {
+    return;
+  }
+
+  // 갤러리는 기존처럼 손 떼면 원복
   currentScale = 1;
   isZoomed = false;
 
@@ -595,6 +606,7 @@ container.addEventListener('touchend', () => {
   setTimeout(() => {
     modalImg.style.transition = 'transform 0.15s ease';
   }, 200);
+
 }, { passive: false });
     
     container.addEventListener('touchstart', (e) => {
@@ -636,7 +648,8 @@ function handleSwipe() {
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
     $('#locationMapImg').src = 'images/location/1.jpg';
-    $('#locationMapImg').addEventListener('click', () => {
+$('#locationMapImg').addEventListener('click', () => {
+  isMapMode = true;
   openPhotoModal(['images/location/1.jpg'], 0);
 });
     $('#kakaoMapBtn').href = w.mapLinks.kakao || '#';
