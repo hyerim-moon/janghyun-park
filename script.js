@@ -465,6 +465,7 @@ div.addEventListener('click', () => {
   let isZoomed = false;
   let touchStartY = 0;
   let touchEndY = 0;
+  let savedScrollY = 0;
 
 
 function resetZoom() {
@@ -483,9 +484,12 @@ function resetZoom() {
 }
   
 function openPhotoModal(images, index) {
+  savedScrollY = window.scrollY;
+
   modalImages = images;
   modalIndex = index;
   showModalImage();
+
   $('#photoModal').classList.add('is-open');
   document.body.classList.add('no-scroll');
 }
@@ -493,8 +497,11 @@ function openPhotoModal(images, index) {
 function closePhotoModal() {
   $('#photoModal').classList.remove('is-open');
   document.body.classList.remove('no-scroll');
-}
 
+  setTimeout(() => {
+    window.scrollTo(0, savedScrollY);
+  }, 0);
+}
  function showModalImage() {
   resetZoom();
 
