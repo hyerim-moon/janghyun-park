@@ -472,7 +472,6 @@ div.addEventListener('click', () => {
   let modalImages = [];
   let modalIndex = 0;
   let isMapMode = false;
-  let savedScrollY = 0;
   let touchStartX = 0;
   let initialDistance = 0;
   let currentScale = 1;
@@ -503,25 +502,16 @@ function resetZoom() {
 }
   
 function openPhotoModal(images, index) {
-  savedScrollY = window.scrollY;
-
   modalImages = images;
   modalIndex = index;
   showModalImage();
-
   $('#photoModal').classList.add('is-open');
-
-  document.body.style.top = `-${savedScrollY}px`;
   document.body.classList.add('no-scroll');
 }
 
 function closePhotoModal() {
   $('#photoModal').classList.remove('is-open');
-
   document.body.classList.remove('no-scroll');
-  document.body.style.top = '';
-
-  window.scrollTo(0, savedScrollY);
 }
 
  function showModalImage() {
