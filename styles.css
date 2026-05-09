@@ -414,6 +414,7 @@ a {
   color: var(--color-white);
   padding: 0 var(--spacing-md) var(--spacing-lg);
   width: 100%;
+  top: 60px;
 }
 
 .hero__label {
@@ -424,7 +425,6 @@ a {
   text-transform: uppercase;
   margin-bottom: var(--spacing-sm);
   opacity: 0.85;
-   transform: translateY(-160px);
 }
 
 .hero__names {
@@ -434,7 +434,6 @@ a {
   letter-spacing: 8px;
   margin-bottom: var(--spacing-md);
   line-height: 1.4;
-   transform: translateY(-160px);
 }
 
 .hero__divider {
