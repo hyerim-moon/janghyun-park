@@ -329,15 +329,15 @@
 
   function initCalendar() {
     const dt = getWeddingDateTime();
-    const year = dt.getFullYear();
-     = dt.getMonth();
-    const weddingDay = dt.getDate();
+const year = dt.getFullYear();
+const month = dt.getMonth();
+const weddingDay = dt.getDate();
 
     const grid = $('#calendarGrid');
 
     // Header
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'Septembe', 'October', 'November', 'December'];
+      'July', 'August', 'September', 'October', 'November', 'December'];
     grid.innerHTML = `<div class="calendar__header">${year}년 ${month + 1}월</div>`;
 
     // Weekdays
@@ -460,7 +460,10 @@ div.addEventListener('click', () => {
       div.className = 'gallery__item animate-item';
       div.setAttribute('data-animate', 'scale-in');
       div.innerHTML = `<img src="${src}" alt="갤러리 사진 ${i + 1}" loading="lazy">`;
-      div.addEventListener('click', () => openPhotoModal(galleryImages, i));
+div.addEventListener('click', () => {
+  isMapMode = false;
+  openPhotoModal(galleryImages, i);
+});
       grid.appendChild(div);
     });
   }
