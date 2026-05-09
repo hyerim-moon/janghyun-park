@@ -472,14 +472,15 @@ div.addEventListener('click', () => {
   let modalImages = [];
   let modalIndex = 0;
   let isMapMode = false;
+  let savedScrollY = 0;
   let touchStartX = 0;
-      let initialDistance = 0;
-    let currentScale = 1;
-    let translateX = 0;
-let translateY = 0;
-let panStartX = 0;
-let panStartY = 0;
-let isPanning = false;
+  let initialDistance = 0;
+  let currentScale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let panStartX = 0;
+  let panStartY = 0;
+  let isPanning = false;
   let touchEndX = 0;
   let isZoomed = false;
   let touchStartY = 0;
@@ -501,18 +502,27 @@ function resetZoom() {
     'center center';
 }
   
-  function openPhotoModal(images, index) {
-    modalImages = images;
-    modalIndex = index;
-    showModalImage();
-    $('#photoModal').classList.add('is-open');
-    document.body.classList.add('no-scroll');
-  }
+function openPhotoModal(images, index) {
+  savedScrollY = window.scrollY;
 
-  function closePhotoModal() {
-    $('#photoModal').classList.remove('is-open');
-    document.body.classList.remove('no-scroll');
-  }
+  modalImages = images;
+  modalIndex = index;
+  showModalImage();
+
+  $('#photoModal').classList.add('is-open');
+
+  document.body.style.top = `-${savedScrollY}px`;
+  document.body.classList.add('no-scroll');
+}
+
+function closePhotoModal() {
+  $('#photoModal').classList.remove('is-open');
+
+  document.body.classList.remove('no-scroll');
+  document.body.style.top = '';
+
+  window.scrollTo(0, savedScrollY);
+}
 
  function showModalImage() {
   resetZoom();
