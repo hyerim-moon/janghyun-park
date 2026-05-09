@@ -315,7 +315,7 @@
       </div>
       <div class="parent-row">
         ${parentLine(b.father, b.mother, b.fatherDeceased, b.motherDeceased)}
-        <span class="parent-dot">●</span>
+        <span class="parent-dot" style="margin-left:10px;">●</span>
         &nbsp;의 딸 <span class="child-name">${b.name}</span>
       </div>
     `;
