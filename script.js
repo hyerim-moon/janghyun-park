@@ -866,7 +866,7 @@ $('#locationMapImg').addEventListener('click', () => {
     ]);
 
     // Render sections with discovered images
-    initStory(storyImages);
+    // initStory(storyImages);
     initGallery(galleryImages);
   }
 
