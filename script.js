@@ -473,6 +473,13 @@ div.addEventListener('click', () => {
   let modalIndex = 0;
   let isMapMode = false;
   let touchStartX = 0;
+      let initialDistance = 0;
+    let currentScale = 1;
+    let translateX = 0;
+let translateY = 0;
+let panStartX = 0;
+let panStartY = 0;
+let isPanning = false;
   let touchEndX = 0;
   let isZoomed = false;
   let touchStartY = 0;
@@ -481,8 +488,17 @@ div.addEventListener('click', () => {
 
 function resetZoom() {
   isZoomed = false;
+
+  translateX = 0;
+  translateY = 0;
+
   const img = $('#modalImg');
-  img.classList.remove('is-zoomed');
+
+  img.style.transform =
+    'translate(0px, 0px) scale(1)';
+
+  img.style.transformOrigin =
+    'center center';
 }
   
   function openPhotoModal(images, index) {
@@ -530,8 +546,7 @@ function resetZoom() {
     });
     const modalImg = $('#modalImg');
     
-    let initialDistance = 0;
-    let currentScale = 1;
+
 
 function getDistance(touches) {
   const dx = touches[0].clientX - touches[1].clientX;
@@ -551,6 +566,13 @@ function getDistance(touches) {
     // Swipe support
     const container = $('#modalContainer');
 container.addEventListener('touchstart', (e) => {
+  if (isMapMode && e.touches.length === 1 && currentScale > 1) {
+    isPanning = true;
+    panStartX = e.touches[0].clientX - translateX;
+    panStartY = e.touches[0].clientY - translateY;
+    return;
+  }
+
   if (e.touches.length === 2) {
     initialDistance = getDistance(e.touches);
     isZoomed = true;
@@ -558,6 +580,8 @@ container.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 container.addEventListener('touchmove', (e) => {
+
+  // 두 손가락 확대
   if (e.touches.length === 2) {
     e.preventDefault();
 
@@ -584,16 +608,38 @@ container.addEventListener('touchmove', (e) => {
       `${originX}% ${originY}%`;
 
     modalImg.style.transform =
-      `scale(${currentScale})`;
+      `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
   }
+
+  // 오시는 길 사진 드래그 이동
+  if (
+    isMapMode &&
+    e.touches.length === 1 &&
+    isPanning &&
+    currentScale > 1
+  ) {
+
+    e.preventDefault();
+
+    translateX =
+      e.touches[0].clientX - panStartX;
+
+    translateY =
+      e.touches[0].clientY - panStartY;
+
+    modalImg.style.transform =
+      `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+  }
+
 }, { passive: false });
 
 container.addEventListener('touchend', () => {
 
   // 오시는 길 이미지는 확대 유지
-  if (isMapMode) {
-    return;
-  }
+if (isMapMode) {
+  isPanning = false;
+  return;
+}
 
   // 갤러리는 기존처럼 손 떼면 원복
   currentScale = 1;
